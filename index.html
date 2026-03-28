@@ -18,13 +18,28 @@
         .poem-container::-webkit-scrollbar-thumb { background-color: #333; }
         .poem-stanza { margin-bottom: 15px; }
         .side-quest input { background: transparent; border: none; border-bottom: 1px solid #333; color: #fff; font-family: 'Courier New', Courier, monospace; font-size: 12px; text-align: right; padding: 5px; outline: none; width: 150px; transition: all 0.3s ease; }
+        
+        /* Hidden submit buttons to trigger mobile keyboard "Go" action */
+        .hidden-submit { display: none; }
+
+        /* Mobile Fix: adjust poem width for smaller screens */
+        @media (max-width: 600px) {
+            .side-quest { right: 20px; bottom: 20px; width: 90%; align-items: center; text-align: center; }
+            .poem-container { width: 100%; text-align: center; padding-right: 0; }
+            .side-quest input { text-align: center; width: 200px; }
+        }
     </style>
 </head>
 <body>
+
     <div class="main-gate">
         <h1>The Final Door</h1>
-        <input type="text" id="main-passcode" placeholder="ENTER CODE" autocomplete="off">
+        <form id="main-form" action="javascript:void(0);">
+            <input type="text" id="main-passcode" placeholder="ENTER CODE" autocomplete="off">
+            <input type="submit" class="hidden-submit">
+        </form>
     </div>
+
     <div class="side-quest">
         <h2>This shall lead you</h2>
         <div class="poem-container">
@@ -39,15 +54,35 @@
             <div class="poem-stanza">Two little Soldier Boys sitting in the sun; One got frizzld up and then there was one.</div>
             <div class="poem-stanza">One little Soldier Boy left all alone; He went and hanged himelf and then there were none.</div>
         </div>
-        <input type="text" id="gallery-passcode" placeholder="SOLVE" autocomplete="off">
+        <form id="gallery-form" action="javascript:void(0);">
+            <input type="text" id="gallery-passcode" placeholder="SOLVE" autocomplete="off">
+            <input type="submit" class="hidden-submit">
+        </form>
     </div>
+
     <script>
-        document.getElementById('main-passcode').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter' && this.value.trim() === '3141592653') { window.location.href = 'stage-2.html'; }
-        });
-        document.getElementById('gallery-passcode').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter' && this.value.toUpperCase().trim() === 'STRATEGIES') { window.location.href = 'gallery.html'; }
-        });
+        // HANDLE MAIN GATE SUBMIT
+        document.getElementById('main-form').onsubmit = function() {
+            const val = document.getElementById('main-passcode').value.trim();
+            if (val === '3141592653') { 
+                window.location.href = 'stage-2.html'; 
+            } else {
+                // Visual feedback for wrong password
+                document.getElementById('main-passcode').style.color = '#f00';
+                setTimeout(() => { document.getElementById('main-passcode').style.color = '#fff'; }, 500);
+            }
+        };
+
+        // HANDLE GALLERY SUBMIT
+        document.getElementById('gallery-form').onsubmit = function() {
+            const val = document.getElementById('gallery-passcode').value.toUpperCase().trim();
+            if (val === 'STRATEGIES1890') { 
+                window.location.href = 'gallery.html'; 
+            } else {
+                document.getElementById('gallery-passcode').style.color = '#f00';
+                setTimeout(() => { document.getElementById('gallery-passcode').style.color = '#fff'; }, 500);
+            }
+        };
     </script>
 </body>
 </html>
