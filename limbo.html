@@ -1,152 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>STATUS: LIMBO</title>
+    <meta charset="UTF-8"><title>STATUS: LIMBO</title>
     <style>
-        body {
-            background-color: #030303;
-            color: #dcdcdc;
-            font-family: 'Courier New', Courier, monospace;
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            background-image: radial-gradient(circle at 50% 50%, #111 0%, #000 100%);
-        }
-
-        .system-message {
-            font-size: 14px;
-            letter-spacing: 4px;
-            color: #0f0;
-            margin-bottom: 50px;
-            text-align: center;
-            text-transform: uppercase;
-        }
-
-        .timer-container {
-            font-size: 6vw; 
-            font-weight: bold;
-            letter-spacing: 10px;
-            color: #ff3333;
-            text-shadow: 0 0 20px rgba(255, 51, 51, 0.5);
-            margin-bottom: 60px;
-            font-variant-numeric: tabular-nums; 
-        }
-
-        .glitch-active {
-            animation: text-glitch 0.2s infinite;
-        }
-
-        @keyframes text-glitch {
-            0% { transform: translate(0) }
-            20% { transform: translate(-3px, 2px); color: #fff; }
-            40% { transform: translate(-1px, -1px); color: #ff3333; }
-            60% { transform: translate(3px, 1px); color: #0f0; }
-            80% { transform: translate(1px, -2px); color: #ff3333; }
-            100% { transform: translate(0) }
-        }
-
-        .final-directive {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            opacity: 0; /* Hidden until timer snaps */
-            transition: opacity 2s ease;
-            text-align: center;
-        }
-
-        .directive-text {
-            font-size: 14px;
-            letter-spacing: 3px;
-            color: #aaa;
-            margin-bottom: 25px;
-            line-height: 1.8;
-            text-transform: uppercase;
-        }
-
-        .clearance-code {
-            font-size: 24px;
-            font-weight: bold;
-            letter-spacing: 8px;
-            color: #fff;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 15px 30px;
-            border: 1px solid #333;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
-        }
-        
-        .warning {
-            margin-top: 20px;
-            font-size: 10px;
-            color: #ff3333;
-            letter-spacing: 5px;
-        }
+        body { background-color: #030303; color: #dcdcdc; font-family: 'Courier New', monospace; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden; background-image: radial-gradient(circle at 50% 50%, #111 0%, #000 100%); }
+        .timer-container { font-size: 6vw; font-weight: bold; letter-spacing: 10px; color: #ff3333; margin-bottom: 60px; }
+        .glitch-active { animation: text-glitch 0.2s infinite; }
+        @keyframes text-glitch { 20% { transform: translate(-3px, 2px); color: #fff; } 40% { transform: translate(-1px, -1px); color: #ff3333; } 60% { transform: translate(3px, 1px); color: #0f0; } }
+        .final-directive { display: flex; flex-direction: column; align-items: center; opacity: 0; transition: opacity 2s ease; text-align: center; }
+        .clearance-code { font-size: 24px; letter-spacing: 8px; color: #fff; background: rgba(255,255,255,0.05); padding: 15px 30px; border: 1px solid #333; }
     </style>
 </head>
 <body>
-
-    <div class="system-message">
-        > SECURITY OVERRIDE ACCEPTED.<br>
-        > INITIATING PHASE TWO STANDBY.
-    </div>
-
-    <div class="timer-container glitch-active" id="countdown">
-        99:99:99:99
-    </div>
-
+    <div style="font-size:14px; letter-spacing:4px; color:#0f0; margin-bottom:50px;">> INITIATING PHASE TWO STANDBY.</div>
+    <div class="timer-container glitch-active" id="countdown">99:99:99:99</div>
     <div class="final-directive" id="directive-block">
-        <div class="directive-text">
-            SYSTEM LOCKED UNTIL EXPIRATION.<br>
-            RETAIN THIS KEY FOR THE NEXT GATE.
-        </div>
+        <div style="margin-bottom:25px; letter-spacing:3px;">RETAIN THIS KEY FOR THE NEXT GATE.</div>
         <div class="clearance-code">ECLIPSE-01</div>
-        <div class="warning">THERE WILL BE NO REMINDERS.</div>
+        <div style="margin-top:20px; font-size:10px; color:#ff3333; letter-spacing:5px;">THERE WILL BE NO REMINDERS.</div>
     </div>
-
     <script>
         const timerElement = document.getElementById('countdown');
-        const directiveBlock = document.getElementById('directive-block');
-
-        // Target date exactly 30 days from right now
-        const targetDate = new Date();
-        targetDate.setDate(targetDate.getDate() + 30);
-
+        const targetDate = new Date(); targetDate.setDate(targetDate.getDate() + 30);
         function updateTimer() {
-            const now = new Date();
-            const difference = targetDate - now;
-
-            if (difference <= 0) {
-                timerElement.innerText = "00:00:00:00";
-                return;
-            }
-
-            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-            const format = (num) => num.toString().padStart(2, '0');
-            timerElement.innerText = `${format(days)}:${format(hours)}:${format(minutes)}:${format(seconds)}`;
+            const now = new Date(); const diff = targetDate - now;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const min = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const sec = Math.floor((diff % (1000 * 60)) / 1000);
+            const pad = (n) => n.toString().padStart(2, '0');
+            timerElement.innerText = `${pad(days)}:${pad(hours)}:${pad(min)}:${pad(sec)}`;
         }
-
-        // The dramatic reveal logic
         setTimeout(() => {
-            // Stop glitching after 3.5 seconds
-            timerElement.classList.remove('glitch-active');
-            timerElement.style.color = '#fff'; 
-            timerElement.style.textShadow = 'none';
-            
-            // Start the actual countdown
-            updateTimer();
-            setInterval(updateTimer, 1000);
-
-            // Fade in the final key
-            directiveBlock.style.opacity = '1';
+            timerElement.classList.remove('glitch-active'); timerElement.style.color = '#fff';
+            updateTimer(); setInterval(updateTimer, 1000);
+            document.getElementById('directive-block').style.opacity = '1';
         }, 3500);
     </script>
 </body>
