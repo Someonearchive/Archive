@@ -1,145 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CRITICAL OVERRIDE</title>
+    <meta charset="UTF-8"><title>CRITICAL OVERRIDE</title>
     <style>
-        body {
-            background-color: #050000;
-            color: #ff3333; /* Aggressive emergency red */
-            font-family: 'Courier New', Courier, monospace;
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-        }
-
-        /* The Blinking Morse Code Light */
-        .status-light {
-            position: absolute;
-            top: 30px;
-            right: 40px;
-            width: 15px;
-            height: 15px;
-            border-radius: 50%;
-            background-color: #ff0000;
-            box-shadow: 0 0 15px #ff0000;
-            opacity: 0;
-            /* Animation sequence: 4 short blinks (dots), 1 long blink (dash), then pause */
-            animation: morse-four 6s infinite; 
-        }
-
-        @keyframes morse-four {
-            0%, 5% { opacity: 1; } 6%, 10% { opacity: 0; }     /* Dot 1 */
-            11%, 16% { opacity: 1; } 17%, 21% { opacity: 0; }  /* Dot 2 */
-            22%, 27% { opacity: 1; } 28%, 32% { opacity: 0; }  /* Dot 3 */
-            33%, 38% { opacity: 1; } 39%, 43% { opacity: 0; }  /* Dot 4 */
-            44%, 60% { opacity: 1; } 61%, 100% { opacity: 0; } /* Dash 5 (Longer) + Pause */
-        }
-
-        .container {
-            text-align: center;
-            max-width: 600px;
-            border: 1px solid #ff3333;
-            padding: 50px;
-            background-color: rgba(255, 0, 0, 0.05);
-        }
-
-        h1 {
-            font-size: 24px;
-            letter-spacing: 5px;
-            margin-bottom: 20px;
-            animation: glitch 2s infinite;
-        }
-
-        .error-code {
-            font-size: 32px;
-            font-weight: bold;
-            letter-spacing: 10px;
-            margin: 40px 0;
-            color: #fff;
-            text-shadow: 0 0 10px #ff3333;
-        }
-
-        .input-group label {
-            font-size: 12px;
-            letter-spacing: 3px;
-            display: block;
-            margin-bottom: 15px;
-        }
-
-        input {
-            background: rgba(255, 0, 0, 0.1);
-            border: 1px solid #ff3333;
-            color: #fff;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 18px;
-            text-align: center;
-            padding: 15px;
-            outline: none;
-            width: 80%;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        input:focus {
-            box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
-            background: rgba(255, 0, 0, 0.2);
-        }
-
-        /* Subtle glitch effect for the header */
-        @keyframes glitch {
-            0% { transform: translate(0) }
-            20% { transform: translate(-2px, 1px) }
-            40% { transform: translate(-1px, -1px) }
-            60% { transform: translate(2px, 1px) }
-            80% { transform: translate(1px, -1px) }
-            100% { transform: translate(0) }
-        }
+        body { background-color: #050000; color: #ff3333; font-family: 'Courier New', monospace; height: 100vh; display: flex; align-items: center; justify-content: center; position: relative; }
+        #init-overlay { position: absolute; top:0; left:0; width:100%; height:100%; background:#050000; color:#ff3333; display:flex; align-items:center; justify-content:center; z-index:9999; cursor:pointer; letter-spacing:4px; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .status-light { position: absolute; top: 30px; right: 40px; width: 15px; height: 15px; border-radius: 50%; background:#f00; box-shadow: 0 0 15px #f00; opacity: 0; animation: morse-four 6s infinite; animation-play-state: paused; }
+        @keyframes morse-four { 0%,5%,11%,16%,22%,27%,33%,38% {opacity:1} 6%,10%,17%,21%,28%,32%,39%,43% {opacity:0} 44%,60% {opacity:1} 61%,100% {opacity:0} }
+        .container { text-align: center; border: 1px solid #ff3333; padding: 50px; }
+        .error-code { font-size: 32px; letter-spacing: 10px; margin: 40px 0; color: #fff; text-shadow: 0 0 10px #ff3333; }
+        input { background: rgba(255,0,0,0.1); border: 1px solid #ff3333; color: #fff; font-size: 18px; text-align: center; padding: 15px; outline: none; width: 80%; text-transform: uppercase; }
     </style>
 </head>
 <body>
-
-    <div class="status-light"></div>
-
+    <div id="init-overlay">> CLICK TO INITIALIZE PURGE PROTOCOL <</div>
+    <audio id="alarm-audio" src="alarm.mp3" loop style="display: none;"></audio>
+    <div class="status-light" id="morse-light"></div>
     <div class="container">
         <h1>SYSTEM LOCKDOWN</h1>
-        <p>> UNAUTHORIZED ACCESS DETECTED.<br>> INITIATING PURGE PROTOCOL.</p>
-        
         <div class="error-code">DYKDAERK</div>
-
-        <div class="input-group">
-            <label>ENTER MANUAL OVERRIDE</label>
-            <input type="text" id="stage3-passcode" placeholder="AWAITING INPUT" autocomplete="off">
-        </div>
+        <input type="text" id="stage3-passcode" placeholder="OVERRIDE" autocomplete="off">
     </div>
-
     <script>
-        // Ensure Stage 2 redirects to this file!
-        
+        document.getElementById('init-overlay').addEventListener('click', function() {
+            document.getElementById('alarm-audio').play();
+            document.getElementById('morse-light').style.animationPlayState = 'running';
+            this.style.display = 'none';
+            document.getElementById('stage3-passcode').focus();
+        });
         document.getElementById('stage3-passcode').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                const attempt = this.value.toUpperCase().trim();
-                
-                // The solved Caesar cipher
-                if (attempt === 'ZUGZWANG') {
-                    // Success! They have beaten the ARG. On to the clothes!
-                    window.location.href = '/victory.html'; 
-                } else {
-                    // Failure! Aggressive visual rejection
-                    this.style.backgroundColor = '#ff0000';
-                    this.style.color = '#000';
-                    setTimeout(() => { 
-                        this.style.backgroundColor = 'rgba(255, 0, 0, 0.1)'; 
-                        this.style.color = '#fff';
-                        this.value = ''; 
-                    }, 400);
-                }
-            }
+            if (e.key === 'Enter' && this.value.toUpperCase().trim() === 'ZUGZWANG') { window.location.href = 'limbo.html'; }
         });
     </script>
 </body>
