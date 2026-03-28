@@ -1,223 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Archive // 01</title>
+    <meta charset="UTF-8"><title>The Archive // 01</title>
     <style>
-        /* --- GLOBAL AESTHETICS --- */
-        body {
-            background-color: #030303;
-            color: #dcdcdc;
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-            background-image: radial-gradient(circle at 50% 50%, #111 0%, #000 100%);
-        }
-
-        /* Subtle film grain overlay */
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: url('https://www.transparenttextures.com/patterns/stardust.png');
-            opacity: 0.15;
-            pointer-events: none;
-            z-index: 999;
-        }
-
-        h1 {
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 14px;
-            letter-spacing: 10px;
-            color: #555;
-            text-align: center;
-            margin: 100px 0 80px 0;
-            text-transform: uppercase;
-        }
-
-        .gallery-container {
-            display: flex;
-            flex-direction: column;
-            gap: 150px;
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 40px 100px 40px;
-        }
-
-        /* --- ART PIECE LAYOUT --- */
-        .art-piece {
-            display: flex;
-            align-items: center;
-            gap: 50px;
-            opacity: 0.9;
-            transition: opacity 0.4s ease;
-        }
-
-        /* Alternating left/right layout */
-        .art-piece:nth-child(even) {
-            flex-direction: row-reverse;
-        }
-
-        .image-container {
-            flex: 1;
-            overflow: hidden;
-            border: 1px solid #222;
-        }
-
-        .image-container img {
-            width: 100%;
-            height: auto;
-            display: block;
-            filter: grayscale(100%) contrast(120%);
-            transition: filter 0.8s ease, transform 0.8s ease;
-        }
-
-        /* The Magic: Image turns to color and zooms slightly on hover */
-        .image-container:hover img {
-            filter: grayscale(0%) contrast(100%);
-            transform: scale(1.02);
-        }
-
-        .plaque {
-            flex: 1;
-            padding: 20px;
-        }
-
-        .plaque h2 {
-            font-family: 'Times New Roman', Times, serif;
-            font-size: 24px;
-            margin-bottom: 5px;
-            letter-spacing: 2px;
-            color: #fff;
-        }
-
-        .plaque h3 {
-            font-size: 11px;
-            color: #777;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            margin-top: 0;
-            margin-bottom: 25px;
-        }
-
-        .plaque p {
-            font-size: 14px;
-            line-height: 1.8;
-            color: #aaa;
-            max-width: 400px;
-        }
-
-        .return-hint {
-            text-align: center;
-            margin: 100px 0;
-            font-family: 'Courier New', Courier, monospace;
-            font-size: 12px;
-            color: #444;
-            letter-spacing: 4px;
-        }
+        body { background-color: #030303; color: #dcdcdc; font-family: 'Helvetica Neue', sans-serif; margin: 0; padding: 0; overflow-x: hidden; background-image: radial-gradient(circle at 50% 50%, #111 0%, #000 100%); }
+        h1 { font-family: 'Courier New', monospace; font-size: 14px; letter-spacing: 10px; color: #555; text-align: center; margin: 100px 0 80px 0; text-transform: uppercase; }
+        .gallery-container { display: flex; flex-direction: column; gap: 150px; max-width: 1000px; margin: 0 auto; padding: 0 40px 100px 40px; }
+        .art-piece { display: flex; align-items: center; gap: 50px; opacity: 0.9; }
+        .art-piece:nth-child(even) { flex-direction: row-reverse; }
+        .image-container { flex: 1; border: 1px solid #222; overflow: hidden; }
+        .image-container img { width: 100%; filter: grayscale(100%); transition: 0.8s; }
+        .image-container:hover img { filter: grayscale(0%); transform: scale(1.02); }
+        .plaque { flex: 1; padding: 20px; }
+        .plaque h2 { font-family: 'Times New Roman', serif; font-size: 24px; color: #fff; margin-bottom: 5px; }
+        .plaque p { font-size: 14px; line-height: 1.8; color: #aaa; }
     </style>
 </head>
 <body>
-
     <h1>Archive // 01</h1>
-
     <div class="gallery-container">
-        
-        <div class="art-piece">
-            <div class="image-container"><img src="athens.jpg" alt="The School of Athens"></div>
-            <div class="plaque">
-                <h2>The Foundation of Thought</h2>
-                <h3>Raffaello Santi</h3>
-                <p>The philosophical world gathered in a single frame. Observe the architectural dominance of the space; all logic and reason perfectly contained beneath the shadow of three grand arches.</p>
-            </div>
-        </div>
-
-        <div class="art-piece">
-            <div class="image-container"><img src="venus.jpg" alt="The Birth of Venus"></div>
-            <div class="plaque">
-                <h2>The Divine Arrival</h2>
-                <h3>Sandro Botticelli</h3>
-                <p>A mythological triumph suspended in time. The composition centers entirely on the goddess drifting to the shore, anchored visually by the massive, one golden shell upon which she stands.</p>
-            </div>
-        </div>
-
-        <div class="art-piece">
-            <div class="image-container"><img src="memory.jpg" alt="The Persistence of Memory"></div>
-            <div class="plaque">
-                <h2>The Decay of Time</h2>
-                <h3>Salvador Dalí</h3>
-                <p>A surrealist landscape where reality bends. The absolute silence of the scene is only broken by the inevitable decay of the four melting clocks scattered across the barren dreamscape.</p>
-            </div>
-        </div>
-
-        <div class="art-piece">
-            <div class="image-container"><img src="pearl.jpg" alt="Girl with a Pearl Earring"></div>
-            <div class="plaque">
-                <h2>The Northern Enigma</h2>
-                <h3>Johannes Vermeer</h3>
-                <p>A fleeting glance captured in oil. The darkness of the background masterfully redirects all attention to the focal point of her gaze, and the heavy, one luminous pearl reflecting the hidden light source.</p>
-            </div>
-        </div>
-
-        <div class="art-piece">
-            <div class="image-container"><img src="meninas.jpg" alt="Las Meninas"></div>
-            <div class="plaque">
-                <h2>The Royal Illusion</h2>
-                <h3>Diego Velázquez</h3>
-                <p>A brilliant manipulation of perspective. While the canvas stretches deep into the background, the true weight of the court's hierarchy rests squarely on the five central attendants positioned in the foreground.</p>
-            </div>
-        </div>
-
-        <div class="art-piece">
-            <div class="image-container"><img src="babel.jpg" alt="The Tower of Babel"></div>
-            <div class="plaque">
-                <h2>The Collapse of Ambition</h2>
-                <h3>Pieter Bruegel the Elder</h3>
-                <p>A testament to human hubris. Before the ultimate failure of their language, the architects managed to construct a massive spiral foundation, perfectly segmented into nine descending tiers.</p>
-            </div>
-        </div>
-
-        <div class="art-piece">
-            <div class="image-container"><img src="scream.jpg" alt="The Scream"></div>
-            <div class="plaque">
-                <h2>The Echo of Despair</h2>
-                <h3>Edvard Munch</h3>
-                <p>A visceral projection of existential dread. The subject's isolation is amplified by the sheer indifference of the landscape and the two distant figures walking away into the horizon.</p>
-            </div>
-        </div>
-
-        <div class="art-piece">
-            <div class="image-container"><img src="watch.jpg" alt="The Night Watch"></div>
-            <div class="plaque">
-                <h2>The Armed Guard</h2>
-                <h3>Rembrandt van Rijn</h3>
-                <p>A dynamic study in shadow and motion. Amidst the chaos of the militia moving forward, the sharp vertical lines of the six raised pikes pierce the darkness in the background.</p>
-            </div>
-        </div>
-
-        <div class="art-piece">
-            <div class="image-container"><img src="liberty.jpg" alt="Liberty Leading the People"></div>
-            <div class="plaque">
-                <h2>The Price of Freedom</h2>
-                <h3>Eugene Delacroix</h3>
-                <p>The raw, uncompromising reality of revolution. The triumphant push forward is brutally grounded by the grim reality of the five fallen martyrs broken beneath her feet.</p>
-            </div>
-        </div>
-
-        <div class="art-piece">
-            <div class="image-container"><img src="wave.jpg" alt="The Great Wave of Kanagawa"></div>
-            <div class="plaque">
-                <h2>The Fury of the Sea</h2>
-                <h3>Katsushika Hokusai</h3>
-                <p>The overwhelming power of nature frozen in ink. Mount Fuji stands impossibly still in the distance, silently watching the struggle of the three fragile boats caught in the monstrous swell.</p>
-            </div>
-        </div>
-
+        <div class="art-piece"><div class="image-container"><img src="athens.jpg"></div><div class="plaque"><h2>Foundation of Thought</h2><p>Observe the architectural dominance; logic contained beneath three grand arches.</p></div></div>
+        <div class="art-piece"><div class="image-container"><img src="venus.jpg"></div><div class="plaque"><h2>Divine Arrival</h2><p>Anchored visually by the massive, one golden shell upon which she stands.</p></div></div>
+        <div class="art-piece"><div class="image-container"><img src="memory.jpg"></div><div class="plaque"><h2>Decay of Time</h2><p>Broken by the inevitable decay of the four melting clocks scattered across the dreamscape.</p></div></div>
+        <div class="art-piece"><div class="image-container"><img src="pearl.jpg"></div><div class="plaque"><h2>Northern Enigma</h2><p>Attention redirects to the heavy, one luminous pearl reflecting hidden light.</p></div></div>
+        <div class="art-piece"><div class="image-container"><img src="meninas.jpg"></div><div class="plaque"><h2>Royal Illusion</h2><p>Hierarchy rests squarely on the five central attendants in the foreground.</p></div></div>
+        <div class="art-piece"><div class="image-container"><img src="babel.jpg"></div><div class="plaque"><h2>Collapse of Ambition</h2><p>A spiral foundation perfectly segmented into nine descending tiers.</p></div></div>
+        <div class="art-piece"><div class="image-container"><img src="scream.jpg"></div><div class="plaque"><h2>Echo of Despair</h2><p>Amplified by the indifference of the two distant figures walking away.</p></div></div>
+        <div class="art-piece"><div class="image-container"><img src="watch.jpg"></div><div class="plaque"><h2>Armed Guard</h2><p>In the chaos, the sharp vertical lines of the six raised pikes pierce the dark.</p></div></div>
+        <div class="art-piece"><div class="image-container"><img src="liberty.jpg"></div><div class="plaque"><h2>Price of Freedom</h2><p>Grounded by the grim reality of the five fallen martyrs broken beneath her feet.</p></div></div>
+        <div class="art-piece"><div class="image-container"><img src="wave.jpg"></div><div class="plaque"><h2>Fury of the Sea</h2><p>Stillness watching the struggle of the three fragile boats caught in the swell.</p></div></div>
     </div>
-
-    <div class="return-hint">THE DOOR REQUIRES AN ABSOLUTE SEQUENCE.</div>
-
 </body>
 </html>
