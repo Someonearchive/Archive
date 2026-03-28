@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Who are you?</title>
+    <style>
+        body {
+            background-color: #050505;
+            color: #444;
+            font-family: 'Courier New', Courier, monospace;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* --- MAIN GATE (Center) --- */
+        .main-gate {
+            text-align: center;
+        }
+
+        .main-gate h1 {
+            font-size: 14px;
+            letter-spacing: 4px;
+            color: #666;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .main-gate input {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #333;
+            color: #fff;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 16px;
+            text-align: center;
+            padding: 10px;
+            outline: none;
+            width: 250px;
+            transition: all 0.3s ease;
+        }
+
+        .main-gate input:focus {
+            border-bottom: 1px solid #555;
+        }
+
+        .main-gate input::placeholder {
+            color: #222;
+            letter-spacing: 2px;
+        }
+
+        /* --- SIDE QUEST (Bottom Right) --- */
+        .side-quest {
+            position: absolute;
+            bottom: 40px;
+            right: 50px;
+            text-align: right;
+            font-size: 11px;
+            opacity: 0.5; /* Increased visibility as requested */
+            transition: opacity 0.5s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .side-quest:hover {
+            opacity: 1; /* Fully visible when hovered */
+        }
+
+        .side-quest h2 {
+            font-size: 10px;
+            letter-spacing: 3px;
+            color: #666;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .poem-container {
+            max-height: 180px;
+            overflow-y: auto;
+            text-align: left;
+            margin-bottom: 20px;
+            padding-right: 15px;
+            line-height: 1.8;
+            letter-spacing: 1px;
+            width: 380px;
+            scrollbar-width: thin;
+            scrollbar-color: #333 #050505;
+        }
+        
+        .poem-container::-webkit-scrollbar {
+            width: 4px;
+        }
+        .poem-container::-webkit-scrollbar-thumb {
+            background-color: #333;
+        }
+
+        .poem-stanza {
+            margin-bottom: 15px;
+        }
+
+        .side-quest input {
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid #333;
+            color: #fff;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 12px;
+            text-align: right;
+            padding: 5px;
+            outline: none;
+            width: 150px;
+            transition: all 0.3s ease;
+        }
+
+        .side-quest input:focus {
+            border-bottom: 1px solid #555;
+        }
+        
+        .side-quest input::placeholder {
+            color: #222;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-gate">
+        <h1>The Final Door</h1>
+        <input type="text" id="main-passcode" placeholder="ENTER CODE" autocomplete="off">
+    </div>
+
+    <div class="side-quest">
+        <h2>This shall lead you</h2>
+        <div class="poem-container">
+            <div class="poem-stanza">
+                Ten little Soldier Boys went out to dine;<br>
+                One choked his little elf and then there were nine.
+            </div>
+            <div class="poem-stanza">
+                Nine little Soldier Boys sat up very lae;<br>
+                One overslept himself and then there were eight.
+            </div>
+            <div class="poem-stanza">
+                Eight little Soldier Boys traveling in Devon;<br>
+                One said he'd stay thee and then there were seven.
+            </div>
+            <div class="poem-stanza">
+                Seven little Soldier Boys chopping up sticks;<br>
+                One chopped himself in hlves and then there were six.
+            </div>
+            <div class="poem-stanza">
+                Six little Soldier Boys playing with a hive;<br>
+                A bumblebee sung one and then there were five.
+            </div>
+            <div class="poem-stanza">
+                Five little Soldier Boys going in for law;<br>
+                One got in Chancry and then there were four.
+            </div>
+            <div class="poem-stanza">
+                Four little Soldier Boys oing out to sea;<br>
+                A red herring swallowed one and then there were three.
+            </div>
+            <div class="poem-stanza">
+                Three little Soldier Boys walking in the zoo;<br>
+                A bg bear hugged one and then there were two.
+            </div>
+            <div class="poem-stanza">
+                Two little Soldier Boys sitting in the sun;<br>
+                One got frizzld up and then there was one.
+            </div>
+            <div class="poem-stanza">
+                One little Soldier Boy left all alone;<br>
+                He went and hanged himelf and then there were none.
+            </div>
+        </div>
+        <input type="text" id="gallery-passcode" placeholder="SOLVE" autocomplete="off">
+    </div>
+
+    <script>
+        // MAIN GATE LOGIC (Password: 1331)
+        document.getElementById('main-passcode').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                const attempt = this.value.trim();
+                if (attempt === '1331') {
+                    window.location.href = '/stage-2.html'; 
+                } else {
+                    this.style.color = '#444';
+                    setTimeout(() => { this.style.color = '#fff'; this.value = ''; }, 800);
+                }
+            }
+        });
+
+        // GALLERY GATE LOGIC (Password: STRATEGIES1890)
+        document.getElementById('gallery-passcode').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                const attempt = this.value.toUpperCase().trim();
+                if (attempt === 'STRATEGIES1890') {
+                    window.location.href = '/gallery.html'; 
+                } else {
+                    this.style.color = '#444';
+                    setTimeout(() => { this.style.color = '#fff'; this.value = ''; }, 800);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
